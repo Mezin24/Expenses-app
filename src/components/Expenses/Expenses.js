@@ -1,18 +1,25 @@
+import React, { useStage } from 'react';
+
 import './Expenses.css';
 import Card from '../UI/Card';
 import ExpenseItem from './ExpenseItem';
 import ExpensesFilter from './ExpensesFilter';
+import { useState } from 'react/cjs/react.development';
 
 function Expenses(props) {
+  const [currentYear, setCurrentYear] = useState('2020');
+
   const implementFilter = (year) => {
-    console.log('From Expense');
-    console.log(year);
+    setCurrentYear(year);
   };
 
   return (
     <div>
-      <ExpensesFilter onImplementFilter={implementFilter} />
       <Card className="expenses">
+        <ExpensesFilter
+          year={currentYear}
+          onImplementFilter={implementFilter}
+        />
         <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
